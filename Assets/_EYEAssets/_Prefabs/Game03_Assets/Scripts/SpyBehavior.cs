@@ -6,8 +6,7 @@ using UnityEngine.AI;
 
 public class SpyBehavior : MonoBehaviour
 {
-    [SerializeField] private Transform[] _waypoints;
-    
+    [SerializeField] private Transform[] _waypoints;    
     private bool _moveToWaypoint;
     private bool _isInSafeZone;
     [SerializeField] private bool _isHiding;
