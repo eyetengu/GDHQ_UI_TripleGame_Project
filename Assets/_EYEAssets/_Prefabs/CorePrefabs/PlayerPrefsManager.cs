@@ -43,7 +43,8 @@ public class PlayerPrefsManager : MonoBehaviour
         {
             Debug.Log("Player01Name has a value of" + name + ".");
             ContinueFromSave();
-        }
+        }    
+    
     }
 
     public void CreatePlayerSave()
@@ -51,6 +52,7 @@ public class PlayerPrefsManager : MonoBehaviour
         _gameManager.TurnOnPanel(2);
     }
 
+    //Functions- Update Player Stats
     public void UpdatePlayerName()
     {
         Debug.Log("Updating Player name");
@@ -63,12 +65,27 @@ public class PlayerPrefsManager : MonoBehaviour
 
         Debug.Log(inputText);           
     }
+    
+    public void UpdatePlayerScore(int scoreValue)
+    {
+        int score = PlayerPrefs.GetInt("Player01Score");
+        score += scoreValue;
+        PlayerPrefs.SetInt("Player01Score", score);
+        PlayerPrefs.Save();
+    }
 
+    //Functions- other
     public void ContinueFromSave()
     {
         Debug.Log("Continuing From Save");
         _gameManager.ContinueJourney();
     }
+
+
+
+    
+
+
 
     //The player prefs manager is responsible for taking in information regarding players name and score for each game.
     //When a player slot is chosen AND it is empty the player will be asked if they want to save their info there.

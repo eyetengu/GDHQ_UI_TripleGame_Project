@@ -6,18 +6,16 @@ using UnityEngine.UI;
 
 public class SwitchScript : MonoBehaviour
 {
+    [SerializeField] private AudioManager _audioManager;
     [SerializeField] private Slider _switch;
     [SerializeField] private GameObject _onLight;
-    [SerializeField] private AudioClip _switchFlipOn;
-    [SerializeField] private AudioClip _switchFlipOff;
     private bool _isLightOn;
 
-    [SerializeField] private AudioManager _audioManager;
 
     void Start()
     {
         Debug.Log("SwitchScript started");
-        //_audioSource = GameObject.Find("AudioManager").GetComponent<AudioSource>();
+
         if (_audioManager == null)
             _audioManager = FindObjectOfType<AudioManager>();
     }

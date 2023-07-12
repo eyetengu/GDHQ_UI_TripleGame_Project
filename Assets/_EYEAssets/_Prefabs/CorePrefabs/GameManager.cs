@@ -23,33 +23,44 @@ public class GameManager : MonoBehaviour
         //Audio
         if(_audioManager == null)
         {
-            _audioManager = FindObjectOfType<AudioManager>();
+            _audioManager = GameObject.Find("AudioManager").GetComponent<AudioManager>();
             _audioManager.PlayBackgroundMusic();
         }        
     }
 
     void Start()
     {
-        //Panels Initialize
-        foreach (GameObject panel in _panels)
-        {
-            panel.SetActive(false);
-        }
-        _panels[0].SetActive(true);
-
+        TurnOnPanel(0);
     }
 
     public void Update()
     {
-        GamePause();
-        
+        GamePause();        
     }
-
+    
+    private void GamePause()
+    {
+        if (_gameIsPaused)
+            Time.timeScale = 0;
+        else
+            Time.timeScale = 1;        
+    }
 
     public void TurnOnPanel(int panelNumber)
     {
+        foreach (GameObject panel in _panels)
+        {
+            panel.SetActive(false);
+        }
         _panels[panelNumber].SetActive(true);
 
+        //enable persistent menu
+        if (panelNumber >= 5)
+            _panels[10].SetActive(true);
+        else
+            _panels[10].SetActive(false);
+
+        //optional 3D game scene
         if(panelNumber == 7)
             _gameScene.SetActive(true);        
         else
@@ -59,19 +70,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void CreateASaveProfile()
+    public void CreateASaveProfile()    //turns on the overlay menu for saving a profile
     {
         Debug.Log("What to activate?");
         _panels[2].SetActive(true);
         //_panels[4].SetActive(true);
-    }
-
-    private void GamePause()
-    {
-        if (_gameIsPaused)
-            Time.timeScale = 0;
-        else
-            Time.timeScale = 1;        
     }
 
     public void ContinueJourney()
@@ -83,4 +86,8 @@ public class GameManager : MonoBehaviour
         _panels[4].SetActive(true);
     }
 
+    public void SelectGame()
+    {
+        TurnOnPanel(5);
+    }
 }

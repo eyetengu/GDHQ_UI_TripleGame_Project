@@ -11,24 +11,12 @@ public class DropNinjaItem : MonoBehaviour, IDropHandler
     [SerializeField] private bool _isOutfit, _isTool, _isWeapon;
     [SerializeField] private AudioManager _audioManager;
     [SerializeField] private Game01Setup _gameManager01;
-    private int _itemsRemaining = 15;
-    private bool _hasAudioPlayed;
 
 
     void Start()
     {
         _audioManager = FindObjectOfType<AudioManager>();
         _gameManager01= FindObjectOfType<Game01Setup>();
-    }
-
-    private void Update()
-    {
-        Debug.Log(_itemsRemaining);
-        if (_itemsRemaining <= 10 && _hasAudioPlayed == false)
-        {
-            _hasAudioPlayed = true;
-            _audioManager.PlayPlayerWinClip();
-        }
     }
     
     public void OnDrop(PointerEventData eventData)
@@ -40,11 +28,9 @@ public class DropNinjaItem : MonoBehaviour, IDropHandler
                 eventData.pointerDrag.transform.SetParent(this.transform, true);
                 _audioManager.PlayScoreUpClip();
                 _gameManager01.IncreaseScore();
-                _itemsRemaining--;
             }
             else
             {
-                //eventData.pointerDrag.GetComponent<DraggableNinjaItem>()._oldPosition = _thisImage.rectTransform.localPosition;
                 _audioManager.PlayScoreDownClip();
                 _gameManager01.DecreaseScore();
             }
@@ -57,7 +43,6 @@ public class DropNinjaItem : MonoBehaviour, IDropHandler
                 eventData.pointerDrag.transform.SetParent(this.transform, true);
                 _audioManager.PlayScoreUpClip();
                 _gameManager01.IncreaseScore();
-                _itemsRemaining--;
 
             }
             else
@@ -75,7 +60,6 @@ public class DropNinjaItem : MonoBehaviour, IDropHandler
                 eventData.pointerDrag.transform.SetParent(this.transform, true);
                 _audioManager.PlayScoreUpClip();
                 _gameManager01.IncreaseScore();
-                _itemsRemaining--;
             }
             else
             {

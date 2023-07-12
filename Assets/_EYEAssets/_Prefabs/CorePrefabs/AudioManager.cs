@@ -29,7 +29,7 @@ public class AudioManager : MonoBehaviour
     //Music Audio Functions
     public void PlayBackgroundMusic()
     {
-        _audioSourceMusic.PlayOneShot(_musicClips[0]);
+        //_audioSourceMusic.PlayOneShot(_musicClips[0]);
     }    
 
     //General Audio Functions
